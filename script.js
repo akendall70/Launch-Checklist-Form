@@ -37,20 +37,26 @@ window.addEventListener("load", function() {
       pilotStatus.innerHTML = `Pilot ${pilotInput.value} is ready for launch.`;
       copilotStatus.innerHTML = `Co-pilot ${copilotInput.value} is ready for launch.`;
 
-      if (fuelInput.value <= 10000) {
+      if (fuelInput.value <= 10000 && cargoInput.value <= 10000) {
          faultyItems.style.visibility = "visible";
-         fuelStatus.textContent = "Fuel level too low for launch.";
+         fuelStatus.textContent = "Fuel level is too low for launch.";
          cargoStatus.textContent = "Cargo mass is low enough for launch.";
          launchStatus.textContent = "Shuttle is not ready for launch.";
          launchStatus.style.color = "red";
       }
-      else if (cargoInput.value > 10000) {
+      else if (cargoInput.value > 10000 && fuelInput.value > 10000) {
          faultyItems.style.visibility = "visible";
-         fuelStatus.textContent = "Fuel level high enough for launch.";
+         fuelStatus.textContent = "Fuel level is high enough for launch.";
          cargoStatus.textContent = "Cargo mass is too heavy for launch.";
          launchStatus.textContent = "Shuttle is not ready for launch.";
          launchStatus.style.color = "red";
-         
+      }
+      else if (cargoInput.value > 10000 && fuelInput.value <= 10000) {
+         faultyItems.style.visibility = "visible";
+         fuelStatus.textContent = "Fuel level is too low for launch.";
+         cargoStatus.textContent = "Cargo mass is too heavy for launch.";
+         launchStatus.textContent = "Shuttle is not ready for launch.";
+         launchStatus.style.color = "red";
       }
       else {
          faultyItems.style.visibility = "visible";
